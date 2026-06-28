@@ -2,8 +2,6 @@
 
 <p align="center">
   <img src="artifacts/logo/K11tech_CASSET.png" alt="K11tech CASSET" width="420"/>
-  <br/>
-  <img src="artifacts/logo/k11_logo.png" alt="K11 Software Solutions" height="72"/>
 </p>
 
 > **Carbon-aware test scheduling for agentic CI/CD pipelines.**  
@@ -179,21 +177,43 @@ python -m scheduler.scheduler submit --pr-id PR-42 --risk-score 0.85 --force-ful
 ```
 k11techlab-carbon-aware-ci-scheduler/
 ├── scheduler/
-│   ├── scheduler.py        # Main entrypoint: CarbonAwareScheduler
-│   ├── carbon_client.py    # Carbon Aware SDK HTTP client
-│   ├── risk_router.py      # Risk classification + routing decisions
-│   ├── defer_engine.py     # APScheduler job management
-│   └── cost_model.py       # Per-agent compute cost + carbon cost formula
+│   ├── scheduler.py              # Main entrypoint: CarbonAwareScheduler + PREvent
+│   ├── carbon_client.py          # Carbon Aware SDK HTTP client
+│   ├── risk_router.py            # Risk classification + routing decisions
+│   ├── defer_engine.py           # APScheduler job management
+│   └── cost_model.py             # Per-agent compute cost + carbon cost formula
+├── api/
+│   └── app.py                    # FastAPI webhook server (POST /webhook/pr, GET /metrics)
 ├── integrations/
-│   └── qa_pipeline_adapter.py  # Adapter to call your QA pipeline
+│   └── qa_pipeline_adapter.py    # Adapter to call your QA pipeline
 ├── config/
-│   └── settings.py         # Centralised config (reads from .env)
+│   ├── settings.py               # Centralised config (reads from .env)
+│   └── .env.example              # Config template for this module
 ├── artifacts/
-│   └── docs/
-│       └── why-carbon-aware-testing.md  # Background and motivation
+│   ├── logo/
+│   │   └── K11tech_CASSET.png    # Project brand image
+│   ├── Screenshots/              # Docker + SDK setup screenshots
+│   ├── docs/                     # Background docs, test strategy, BRD, FRD
+│   └── results/                  # Empirical evaluation results (JSON, CSV, MD)
 ├── tests/
-│   └── test_risk_router.py
+│   ├── conftest.py
+│   ├── e2e/
+│   │   └── test_carbon_scheduling_e2e.py
+│   ├── integration/
+│   │   ├── test_adapter_agentic_pipeline.py
+│   │   ├── test_adapter_stub.py
+│   │   └── test_scheduler_submit.py
+│   ├── production/
+│   │   └── test_production_smoke.py  # Live smoke tests (requires PROD_BASE_URL)
+│   ├── test_api_app.py
+│   ├── test_carbon_client.py
+│   ├── test_cost_model.py
+│   ├── test_defer_engine.py
+│   ├── test_metrics.py
+│   ├── test_risk_router.py
+│   └── test_scheduler.py
 ├── .env.example
+├── pytest.ini
 ├── requirements.txt
 └── LICENSE
 ```
