@@ -1,7 +1,9 @@
 # k11techlab-carbon-aware-ci-scheduler
 
 <p align="center">
-  <img src="artifacts/logo/K11tech_CASSET.png" alt="K11tech" width="320"/>
+  <img src="artifacts/logo/K11tech_CASSET.png" alt="K11tech CASSET" width="420"/>
+  <br/>
+  <img src="artifacts/logo/k11_logo.png" alt="K11 Software Solutions" height="72"/>
 </p>
 
 > **Carbon-aware test scheduling for agentic CI/CD pipelines.**  
@@ -10,7 +12,6 @@
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.11%2B-blue)](https://www.python.org/)
 [![Green Software](https://img.shields.io/badge/GSF-Carbon%20Aware%20SDK-green)](https://github.com/Green-Software-Foundation/carbon-aware-sdk)
-[![K11tech](artifacts/logo/k11_logo.png)](https://github.com/K11-Software-Solutions)
 
 ---
 
