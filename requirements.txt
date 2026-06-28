@@ -1,0 +1,24 @@
+# Carbon-aware CI scheduler dependencies
+# Install with: pip install -r requirements.txt
+
+# HTTP client (async) — for Carbon Aware SDK calls
+httpx>=0.27.0
+
+# Job scheduling — APScheduler with thread pool executor
+APScheduler>=3.10.4
+
+# Environment variable loading
+python-dotenv>=1.0.0
+
+# Type hints backport (Python < 3.11)
+typing-extensions>=4.9.0
+
+# ── Optional: FastAPI webhook server ─────────────────────────────────────────
+# Uncomment to expose a /webhook/pr endpoint for GitHub Actions integration
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
+
+# ── Development / testing ────────────────────────────────────────────────────
+# pytest>=8.0.0
+# pytest-asyncio>=0.23.0
+# respx>=0.21.0         # mock httpx requests (for carbon client tests)

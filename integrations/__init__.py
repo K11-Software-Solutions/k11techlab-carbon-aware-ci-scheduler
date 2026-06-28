@@ -1,0 +1,1 @@
+"""QA pipeline integration adapters."""

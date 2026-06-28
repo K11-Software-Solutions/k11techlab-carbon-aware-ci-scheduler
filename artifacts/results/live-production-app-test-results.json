@@ -1,0 +1,61 @@
+﻿{
+    "status":  "PASS_READ_ONLY_PRODUCTION_SMOKE",
+    "run_date":  "2026-06-28",
+    "production_base_url":  "https://k11softwaresolutions.com/",
+    "command":  "python -m pytest tests\\production\\ -o addopts=\"\" -m \"production\" -v --tb=short",
+    "outcome":  {
+                    "collected":  4,
+                    "passed":  2,
+                    "skipped":  2,
+                    "failed":  0,
+                    "errors":  0,
+                    "duration_seconds":  0.85
+                },
+    "passed_tests":  [
+                         "test_production_app_reachable_read_only",
+                         "test_production_webhook_contract_read_only_probe"
+                     ],
+    "skipped_tests":  [
+                          {
+                              "test":  "test_production_metrics_endpoint_if_available",
+                              "reason":  "Metrics endpoint not exposed at /metrics."
+                          },
+                          {
+                              "test":  "test_production_webhook_canary_submit_explicit_opt_in",
+                              "reason":  "PROD_ALLOW_MUTATION=1 was not set."
+                          }
+                      ],
+    "endpoint_probe":  [
+                           {
+                               "method":  "GET",
+                               "path":  "/health",
+                               "status_code":  404,
+                               "interpretation":  "No public health endpoint at this path."
+                           },
+                           {
+                               "method":  "GET",
+                               "path":  "/metrics",
+                               "status_code":  404,
+                               "interpretation":  "No public metrics endpoint at this path."
+                           },
+                           {
+                               "method":  "GET",
+                               "path":  "/",
+                               "status_code":  200,
+                               "interpretation":  "Company site is reachable."
+                           },
+                           {
+                               "method":  "OPTIONS",
+                               "path":  "/webhook/pr",
+                               "status_code":  204,
+                               "interpretation":  "Route/proxy gives a deliberate read-only response to OPTIONS."
+                           }
+                       ],
+    "mutation_guard":  "Webhook POST canary was not run because PROD_ALLOW_MUTATION=1 was not set.",
+    "limitation":  "This verifies read-only production reachability and route/proxy behavior; it does not prove that the carbon-aware scheduler webhook is deployed because no canary POST was run.",
+    "initial_sandbox_run":  {
+                                "status":  "FAILED_NETWORK_PERMISSION",
+                                "error":  "WinError 10013",
+                                "resolution":  "Reran read-only suite with approved network access."
+                            }
+}

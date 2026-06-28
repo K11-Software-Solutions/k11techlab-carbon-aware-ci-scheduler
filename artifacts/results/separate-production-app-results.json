@@ -1,0 +1,64 @@
+{
+  "run_date": "2026-06-28",
+  "status": "LOCAL_REPO_CREATED_DEPLOYMENT_PENDING",
+  "standalone_app_path": "production-scheduler-api-app/",
+  "local_git_commit": "e30fcc0",
+  "implemented_endpoints": [
+    {
+      "method": "GET",
+      "path": "/health",
+      "expected_status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/metrics",
+      "expected_status": 200,
+      "protected_status_when_token_set": 401
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/webhook/pr",
+      "expected_status": 204
+    },
+    {
+      "method": "POST",
+      "path": "/webhook/pr",
+      "expected_status": 202,
+      "protected_status_when_token_set": 401
+    }
+  ],
+  "verification": [
+    {
+      "name": "standalone_app_tests",
+      "working_directory": "production-scheduler-api-app",
+      "command": "python -m pytest -v",
+      "passed": 5,
+      "failed": 0,
+      "errors": 0,
+      "duration_seconds": 0.39,
+      "outcome": "PASS"
+    },
+    {
+      "name": "production_smoke_harness_local_standalone_app",
+      "base_url": "http://127.0.0.1:8017",
+      "command": "python -m pytest tests\\production\\ -o addopts=\"\" -m \"production\" -v --tb=short",
+      "environment": {
+        "PROD_ALLOW_MUTATION": "1",
+        "PROD_TEST_PR_ID": "local-standalone-prod-canary",
+        "PROD_TEST_RISK_SCORE": "0.10"
+      },
+      "passed": 4,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "duration_seconds": 0.23,
+      "outcome": "PASS"
+    }
+  ],
+  "deployment": {
+    "cloud_deployment_completed": false,
+    "reason": "Cloud target and account authorization are required before pushing/deploying the separate app.",
+    "recommended_repo_name": "k11-carbon-scheduler-api"
+  },
+  "limitation": "The local result validates endpoint contract compatibility but does not prove public Internet reachability, deployment-platform behavior, DNS, or TLS."
+}
