@@ -1,3 +1,5 @@
+# Copyright 2026 Kavita Jadhav, K11 Software Solutions LLC.
+# SPDX-License-Identifier: Apache-2.0
 """
 tests/integration/test_scheduler_submit.py
 ==========================================

@@ -1,3 +1,5 @@
+# Copyright 2026 Kavita Jadhav, K11 Software Solutions LLC.
+# SPDX-License-Identifier: Apache-2.0
 """
 tests/e2e/test_carbon_scheduling_e2e.py
 =======================================

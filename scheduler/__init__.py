@@ -1,3 +1,5 @@
+# Copyright 2026 Kavita Jadhav, K11 Software Solutions LLC.
+# SPDX-License-Identifier: Apache-2.0
 """K11tech Carbon-Aware CI Scheduler."""
 from .scheduler import CarbonAwareScheduler, PREvent
 from .carbon_client import CarbonAwareClient, CarbonForecast, CarbonWindow
